@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
+
 
 public class Player : MonoBehaviour
 {
