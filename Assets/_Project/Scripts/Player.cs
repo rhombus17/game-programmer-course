@@ -1,9 +1,18 @@
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
+
 
 public class Player : MonoBehaviour
 {
     [SerializeField] float _speed = 5f;
     [SerializeField] float _jumpForce = 200f;
+
+    Vector2 _startPosition;
+
+    void Start()
+    {
+        _startPosition = transform.position;
+    }
 
     void Update()
     {
@@ -29,5 +38,11 @@ public class Player : MonoBehaviour
         {
             rigidbody2D.AddForce(Vector2.up * _jumpForce);
         }
+    }
+
+    public void ResetToStart()
+    {
+        transform.position = _startPosition;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }
