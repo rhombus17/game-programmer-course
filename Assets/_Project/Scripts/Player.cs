@@ -4,6 +4,7 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] Transform _feet;
     [SerializeField] float _speed = 5f;
     [SerializeField] int _maxJumps = 2;
     [SerializeField] float _jumpForce = 200f;
@@ -46,7 +47,11 @@ public class Player : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collider)
     {
-        _jumpsRemaining = _maxJumps;
+        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
+        if (hit != null)
+        {
+            _jumpsRemaining = _maxJumps;
+        }
     }
 
     public void ResetToStart()
