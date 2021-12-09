@@ -5,13 +5,16 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class Player : MonoBehaviour
 {
     [SerializeField] float _speed = 5f;
+    [SerializeField] int _maxJumps = 2;
     [SerializeField] float _jumpForce = 200f;
 
     Vector2 _startPosition;
+    int _jumpsRemaining;
 
     void Start()
     {
         _startPosition = transform.position;
+        _jumpsRemaining = _maxJumps;
     }
 
     void Update()
@@ -34,10 +37,16 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = horizontal < 0;
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && _jumpsRemaining > 0)
         {
             rigidbody2D.AddForce(Vector2.up * _jumpForce);
+            _jumpsRemaining--;
         }
+    }
+
+    void OnCollisionStay2D(Collision2D collider)
+    {
+        _jumpsRemaining = _maxJumps;
     }
 
     public void ResetToStart()
