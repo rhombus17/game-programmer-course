@@ -7,10 +7,12 @@ public class Player : MonoBehaviour
     [SerializeField] Transform _feet;
     [SerializeField] float _speed = 5f;
     [SerializeField] int _maxJumps = 2;
-    [SerializeField] float _jumpForce = 200f;
+    [SerializeField] float _jumpVelocity = 8f;
+    [SerializeField] float _downPull = 2f;
 
     Vector2 _startPosition;
     int _jumpsRemaining;
+    float _fallTimer;
 
     void Start()
     {
@@ -20,6 +22,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
+        bool isGrounded = hit != null;
+
         var horizontal = Input.GetAxis("Horizontal") * _speed;
         var rigidbody2D = GetComponent<Rigidbody2D>();
 
@@ -38,19 +43,23 @@ public class Player : MonoBehaviour
             spriteRenderer.flipX = horizontal < 0;
         }
 
-        if (Input.GetButtonDown("Fire1") && _jumpsRemaining > 0)
+        if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && _jumpsRemaining > 0)
         {
-            rigidbody2D.AddForce(Vector2.up * _jumpForce);
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, _jumpVelocity);
+            _fallTimer = 0f;
             _jumpsRemaining--;
         }
-    }
 
-    void OnCollisionEnter2D(Collision2D collider)
-    {
-        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
-        if (hit != null)
+        if (isGrounded)
         {
             _jumpsRemaining = _maxJumps;
+            _fallTimer = 0f;
+        }
+        else
+        {
+            _fallTimer += Time.deltaTime;
+            var downForce = _downPull * _fallTimer * _fallTimer;
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, rigidbody2D.velocity.y - downForce);
         }
     }
 
