@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnCollisionStay2D(Collision2D collider)
+    void OnCollisionEnter2D(Collision2D collider)
     {
         var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
         if (hit != null)
