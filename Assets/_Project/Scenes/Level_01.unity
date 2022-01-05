@@ -1010,8 +1010,9 @@ MonoBehaviour:
   _feet: {fileID: 356969642}
   _speed: 5
   _maxJumps: 2
-  _jumpVelocity: 8
+  _jumpVelocity: 9
   _downPull: 0.1
+  _maxJumpDuration: 0.2
 --- !u!95 &1513060860
 Animator:
   serializedVersion: 3

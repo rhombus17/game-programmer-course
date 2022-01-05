@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     [SerializeField] int _maxJumps = 2;
     [SerializeField] float _jumpVelocity = 8f;
     [SerializeField] float _downPull = 2f;
+    [SerializeField] float _maxJumpDuration = 5f;
 
     Vector2 _startPosition;
     int _jumpsRemaining;
     float _fallTimer;
+    float _jumpTimer = 0f;
 
     void Start()
     {
@@ -46,8 +48,15 @@ public class Player : MonoBehaviour
         if ((Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && _jumpsRemaining > 0)
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, _jumpVelocity);
-            _fallTimer = 0f;
             _jumpsRemaining--;
+            _jumpTimer = 0f;
+            _fallTimer = 0f;
+        }
+        else if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && _jumpTimer <= _maxJumpDuration)
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, _jumpVelocity);
+            _fallTimer = 0f;
+            _jumpTimer += Time.deltaTime;
         }
 
         if (isGrounded)
