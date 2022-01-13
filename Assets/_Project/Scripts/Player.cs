@@ -4,8 +4,12 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class Player : MonoBehaviour
 {
+    [Header("Reference")]
     [SerializeField] Transform _feet;
+    [Header("Movement")]
     [SerializeField] float _speed = 5f;
+    [SerializeField] float _slipFactor = 1f;
+    [Header("Jump")]
     [SerializeField] int _maxJumps = 2;
     [SerializeField] float _jumpVelocity = 8f;
     [SerializeField] float _downPull = 2f;
@@ -16,6 +20,7 @@ public class Player : MonoBehaviour
     SpriteRenderer _spriteRenderer;
     Vector2 _startPosition;
     bool _isGrounded;
+    bool _isGroundSlippery;
     int _jumpsRemaining;
     float _fallTimer;
     float _jumpTimer = 0f;
@@ -28,13 +33,18 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _isGroundSlippery = true;
     }
 
     void Update()
     {
         UpdateIsGrounded();
         ReadHorizontalInput();
-        MoveHorizontal();
+
+        if (_isGroundSlippery)
+            SlipHorizontal();
+        else
+            MoveHorizontal();
 
 
         UpdateAnimator();
@@ -65,6 +75,14 @@ public class Player : MonoBehaviour
     {
         var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
         _isGrounded = hit != null;
+
+        if (hit != null)
+            _isGroundSlippery = hit.CompareTag("Slippery");
+
+        
+        // _isGroundSlippery = (hit != null && hit.CompareTag("Slippery"));
+
+        // _isGroundSlippery = hit?.CompareTag("Slippery") ?? false;
     }
 
     void ReadHorizontalInput()
@@ -74,10 +92,18 @@ public class Player : MonoBehaviour
 
     void MoveHorizontal()
     {
-        if (Mathf.Abs(_horizontal) >= 1)
-        {
-            _rigidbody2D.velocity = new Vector2(_horizontal, _rigidbody2D.velocity.y);
-        }
+        _rigidbody2D.velocity = new Vector2(_horizontal, _rigidbody2D.velocity.y);
+    }
+
+    void SlipHorizontal()
+    {
+        var targetVelocity = new Vector2(_horizontal, _rigidbody2D.velocity.y);
+        var smoothedVelocity = Vector2.Lerp(
+            _rigidbody2D.velocity,
+            targetVelocity,
+            Time.deltaTime / _slipFactor);
+
+        _rigidbody2D.velocity = smoothedVelocity;
     }
 
     void UpdateAnimator()
