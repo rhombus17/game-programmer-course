@@ -16,16 +16,42 @@ public class Slime : MonoBehaviour
 
     void Update()
     {
-        var desiredVelocity = new Vector2(-1, _rigidbody2d.velocity.y);
-        _rigidbody2d.velocity = desiredVelocity;
-        Transform sensor = _direction > 0 ? _sensorLeft : _sensorLeft;
+        MoveSlime();
+        ScanSensors();
+    }
 
-        Debug.DrawRay(sensor.position, Vector2.down * 0.1f, Color.red);
-        var result = Physics2D.Raycast(sensor.position, Vector2.down, 0.1f);
-        if (result.collider == null)
+    void MoveSlime()
+    {
+        var desiredVelocity = new Vector2(1, _rigidbody2d.velocity.y) * _direction;
+        _rigidbody2d.velocity = desiredVelocity;
+    }
+
+    void ScanSensors()
+    {
+        Transform sensor = _direction > 0 ? _sensorRight : _sensorLeft;
+        var turnBcDown = ScanSensor(sensor, Vector2.down, true);
+        var turnBcFwd = ScanSensor(sensor, new Vector2(_direction, 0), false);
+        if (turnBcDown || turnBcFwd)
         {
             TurnAround();
         }
+    }
+
+    bool ScanSensor(Transform sensor, Vector2 scanDirection, bool checkForEmpty)
+    {
+        scanDirection = scanDirection.normalized;
+        Debug.DrawRay(sensor.position, scanDirection * 0.1f, Color.red);
+        var result = Physics2D.Raycast(sensor.position, scanDirection, 0.1f);
+        return checkForEmpty ? result.collider == null : result.collider != null;
+        // if (result.collider == null)
+        // {
+        //     TurnAround();
+        // }
+        // var sideResult = Physics2D.Raycast(sensor.position, Vector2.down, 0.1f);
+        // if (sideResult.collider != null)
+        // {
+        //     TurnAround();
+        // }
     }
 
     void TurnAround()
