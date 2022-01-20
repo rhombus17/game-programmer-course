@@ -43,15 +43,6 @@ public class Slime : MonoBehaviour
         Debug.DrawRay(sensor.position, scanDirection * 0.1f, Color.red);
         var result = Physics2D.Raycast(sensor.position, scanDirection, 0.1f);
         return checkForEmpty ? result.collider == null : result.collider != null;
-        // if (result.collider == null)
-        // {
-        //     TurnAround();
-        // }
-        // var sideResult = Physics2D.Raycast(sensor.position, Vector2.down, 0.1f);
-        // if (sideResult.collider != null)
-        // {
-        //     TurnAround();
-        // }
     }
 
     void TurnAround()
@@ -67,6 +58,16 @@ public class Slime : MonoBehaviour
         if (player == null)
             return;
 
-        player.ResetToStart();
+        Vector2 normal = other.contacts[0].normal;
+
+        if (normal.y <= -0.5f)
+            Die();
+        else
+            player.ResetToStart();
+    }
+
+    void Die()
+    {
+        GameObject.Destroy(gameObject);
     }
 }
