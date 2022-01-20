@@ -6,8 +6,10 @@ public class Slime : MonoBehaviour
 {
     [SerializeField] Transform _sensorLeft;
     [SerializeField] Transform _sensorRight;
+    [SerializeField] Sprite _deadSprite;
     Rigidbody2D _rigidbody2d;
     float _direction = -1f;
+    bool _alive = true;
 
     void Awake()
     {
@@ -16,6 +18,8 @@ public class Slime : MonoBehaviour
 
     void Update()
     {
+        if (!_alive)
+            return;
         MoveSlime();
         ScanSensors();
     }
@@ -68,6 +72,25 @@ public class Slime : MonoBehaviour
 
     void Die()
     {
-        GameObject.Destroy(gameObject);
+
+        GetComponent<Animator>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().simulated = false;
+        _alive = false;
+
+        var spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = _deadSprite;
+        StartCoroutine(FadeOutOverTime(spriteRenderer));
+    }
+
+    IEnumerator FadeOutOverTime(SpriteRenderer spriteRenderer)
+    {
+        for (float alpha = 1f; alpha >= 0f; alpha -= Time.deltaTime)
+        {
+            spriteRenderer.color = new Color(1f, 1f, 1f, alpha);
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 }
