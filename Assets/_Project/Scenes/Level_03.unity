@@ -570,7 +570,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239565383}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.024517719, y: 0.037068386, z: 0.00090973155, w: 0.9990115}
   m_LocalPosition: {x: -0.935304, y: 2.4934108, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1673,22 +1673,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1565154293394763978, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565154293394763978, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
-      propertyPath: m_DefaultActionMap
-      value: 2DControl
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565154293394763978, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: P1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565154293394763978, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
-      propertyPath: m_NeverAutoSwitchControlSchemes
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4158399789342785558, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
       propertyPath: m_Name
       value: Player 1
@@ -2073,7 +2057,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8.136088
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2096,7 +2080,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086578564}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.024517719, y: 0.037068386, z: 0.00090973155, w: 0.9990115}
   m_LocalPosition: {x: -0.935304, y: 2.4934108, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
