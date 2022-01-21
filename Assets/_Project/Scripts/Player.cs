@@ -1,9 +1,11 @@
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
+using UnityEngine.InputSystem;
 
 
 public class Player : MonoBehaviour
 {
+    [Range(1,2)]
+    [SerializeField] int _playerNumber = 1;
     [Header("Reference")]
     [SerializeField] Transform _feet;
     [Header("Movement")]
@@ -26,7 +28,10 @@ public class Player : MonoBehaviour
     float _jumpTimer = 0f;
     float _horizontal;
 
-    void Start()
+    bool _jumpCued = false;
+    bool _jumpHeld = false;
+
+    void Awake()
     {
         _startPosition = transform.position;
         _jumpsRemaining = _maxJumps;
@@ -34,12 +39,56 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _isGroundSlippery = true;
+
+        SetupInput();
+    }
+
+    void SetupInput()
+    {
+        var inputAction = new TutInput.InputActions();
+
+        // inputAction._2DControl.Enable();
+        InputAction move;// = inputAction._2DControl.Move;
+        InputAction jump;// = inputAction._2DControl.Jump;
+
+        switch(_playerNumber)
+        {
+            case 1:
+            default:
+                inputAction.P1.Enable();
+                move = inputAction.P1.Move;
+                jump = inputAction.P1.Jump;
+                break;
+            case 2:
+                inputAction.P2.Enable();
+                move = inputAction.P2.Move;
+                jump = inputAction.P2.Jump;
+                break;
+        }
+
+        move.performed += MoveInput;
+        move.canceled += MoveInput;
+        jump.started += JumpInput;
+        jump.performed += JumpInput;
+    }
+
+    public void MoveInput(InputAction.CallbackContext ctx)
+    {
+        _horizontal = ctx.ReadValue<float>();
+    }
+
+    public void JumpInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            _jumpCued = true;
+        }
+        _jumpHeld = ctx.performed;
     }
 
     void Update()
     {
         UpdateIsGrounded();
-        ReadHorizontalInput();
 
         if (_isGroundSlippery)
             SlipHorizontal();
@@ -78,26 +127,16 @@ public class Player : MonoBehaviour
 
         if (hit != null)
             _isGroundSlippery = hit.CompareTag("Slippery");
-
-        
-        // _isGroundSlippery = (hit != null && hit.CompareTag("Slippery"));
-
-        // _isGroundSlippery = hit?.CompareTag("Slippery") ?? false;
-    }
-
-    void ReadHorizontalInput()
-    {
-        _horizontal = Input.GetAxis("Horizontal") * _speed;
     }
 
     void MoveHorizontal()
     {
-        _rigidbody2D.velocity = new Vector2(_horizontal, _rigidbody2D.velocity.y);
+        _rigidbody2D.velocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
     }
 
     void SlipHorizontal()
     {
-        var targetVelocity = new Vector2(_horizontal, _rigidbody2D.velocity.y);
+        var targetVelocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
         var smoothedVelocity = Vector2.Lerp(
             _rigidbody2D.velocity,
             targetVelocity,
@@ -122,12 +161,14 @@ public class Player : MonoBehaviour
 
     bool ShouldStartJump()
     {
-        return (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) && _jumpsRemaining > 0;
+        bool shouldJump = _jumpCued && _jumpsRemaining > 0;
+        _jumpCued = false;
+        return shouldJump;
     }
 
     bool ShouldContinueJump()
     {
-        return (Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && _jumpTimer <= _maxJumpDuration;
+        return (_jumpHeld && _jumpTimer <= _maxJumpDuration);
     }
 
     void Jump()
