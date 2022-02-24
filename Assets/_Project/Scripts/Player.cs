@@ -151,6 +151,8 @@ public class Player : MonoBehaviour
     {
         bool walking = _horizontal != 0;
         _animator.SetBool("Walk", walking);
+        bool jumping = ShouldContinueJump();
+        _animator.SetBool("Jump", jumping);
     }
 
     void UpdateSpriteDirection()
