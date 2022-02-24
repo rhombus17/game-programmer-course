@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] float _downPull = 2f;
     [SerializeField] float _maxJumpDuration = 5f;
 
+    public int PlayerNumber => _playerNumber;
+
     Rigidbody2D _rigidbody2D;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
