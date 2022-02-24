@@ -39,6 +39,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2667899695
+    locked: 0
+  - name: Background Props
+    uniqueID: 853341175
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground Props
+    uniqueID: 4016569873
+    locked: 0
+  - name: Particles
+    uniqueID: 745430701
     locked: 0
