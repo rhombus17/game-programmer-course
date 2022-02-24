@@ -15,6 +15,10 @@ public class Breakable : MonoBehaviour
 
     void TakeHit()
     {
-        gameObject.SetActive(false);
+        var particleSystem = GetComponent<ParticleSystem>();
+        particleSystem.Play();
+
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 }
