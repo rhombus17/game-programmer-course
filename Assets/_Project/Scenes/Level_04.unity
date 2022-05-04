@@ -3817,6 +3817,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd282e58fcf091642a21313d1caa580e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shakeX: 50
+  _shakeY: 2
+  _resetShakeTimerOnEmpty: 1
+  _fallAfterSeconds: 1.01
+  _fallSpeed: 10
 --- !u!1 &1823818130
 GameObject:
   m_ObjectHideFlags: 0
