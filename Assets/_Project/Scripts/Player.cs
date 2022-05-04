@@ -191,7 +191,12 @@ public class Player : MonoBehaviour
 
     public void ResetToStart()
     {
-        transform.position = _startPosition;
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        TeleportTo(_startPosition);
+    }
+
+    public void TeleportTo(Vector3 teleportPosition)
+    {
+        _rigidbody2D.position = teleportPosition;
+        _rigidbody2D.velocity = Vector2.zero;
     }
 }
