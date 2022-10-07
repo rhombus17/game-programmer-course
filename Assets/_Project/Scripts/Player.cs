@@ -1,3 +1,4 @@
+using TutInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,6 +34,8 @@ public class Player : MonoBehaviour
     bool _jumpCued = false;
     bool _jumpHeld = false;
 
+    InputActions _input;
+
     void Awake()
     {
         _startPosition = transform.position;
@@ -42,12 +45,15 @@ public class Player : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _isGroundSlippery = true;
 
-        SetupInput();
+        if (FindObjectOfType<PlayerManager>().multiInput)
+            Setup2PInput();
+        else
+            Setup1PInput();
     }
 
-    void SetupInput()
+    void Setup2PInput()
     {
-        var inputAction = new TutInput.InputActions();
+        InputActions inputAction = new TutInput.InputActions();
 
         // inputAction._2DControl.Enable();
         InputAction move;// = inputAction._2DControl.Move;
@@ -74,6 +80,29 @@ public class Player : MonoBehaviour
         jump.performed += JumpInput;
     }
 
+    public void EnablePlayer()
+    {
+        if (_input != null)
+            _input.Enable();
+    }
+
+    public void DisablePlayer()
+    {
+        if (_input != null)
+            _input.Disable();
+    }
+
+    void Setup1PInput()
+    {
+        _input = new InputActions();
+        // inputActions.Enable();
+
+        _input.P1.Move.performed += MoveInput;
+        _input.P1.Move.canceled += MoveInput;
+        _input.P1.Jump.started += JumpInput;
+        _input.P1.Jump.performed += JumpInput;
+    }
+
     public void MoveInput(InputAction.CallbackContext ctx)
     {
         _horizontal = ctx.ReadValue<float>();
@@ -86,6 +115,14 @@ public class Player : MonoBehaviour
             _jumpCued = true;
         }
         _jumpHeld = ctx.performed;
+    }
+    
+    public void SwitchInput(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.started)
+            return;
+        
+        _playerNumber = _playerNumber == 1 ? 2 : 1;
     }
 
     void Update()
