@@ -67,6 +67,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: Offset
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -114,7 +120,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: FlagWaveGreen
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 0.25
   m_Transitions:
   - {fileID: 6525843222205253067}
   m_StateMachineBehaviours: []
@@ -124,13 +130,13 @@ AnimatorState:
   m_Mirror: 0
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
+  m_CycleOffsetParameterActive: 1
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 1953bca4d7dae1e459f50a923a84a866, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
-  m_CycleOffsetParameter: 
+  m_CycleOffsetParameter: Offset
   m_TimeParameter: 
 --- !u!1101 &8974954615736285319
 AnimatorStateTransition:

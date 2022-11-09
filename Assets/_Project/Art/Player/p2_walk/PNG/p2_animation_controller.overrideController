@@ -6,10 +6,12 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: P2_walk
+  m_Name: p2_animation_controller
   m_Controller: {fileID: 9100000, guid: c540bb36d09bd47409d31ab1983e3b69, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: b3b8b90c7f765614483edd916dd4afad, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 0ba30f5b51c7e6247b7781c72d2550c6, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 4faddf8542923c54d93b9702a48cf208, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 68118aed5e897df46a41530d074a2448, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: be4de778e59b7ed4b9845093c0ed549f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 07b261f6e4f2ec149a2f1bde97f72869, type: 2}

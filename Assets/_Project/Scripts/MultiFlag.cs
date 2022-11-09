@@ -19,6 +19,21 @@ public class MultiFlag : MonoBehaviour
         // Play flag wave
         Animator animator = GetComponent<Animator>();
         animator.SetBool(Raise, true);
+        
+        // How do I synchronize the flags? If they're playing at speed x,
+        /* If they're playing at speed x, then I want to take time % x.
+         * Then that m remainder can be used as m / x?
+         */
+        
+        AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+
+        float clipLength = info.length;
+        float remainder = Time.time % clipLength;
+        float offset = remainder / clipLength;
+        animator.SetFloat("Offset", offset);
+        // animator.SetFloat("Offset", 0.5f);
+        float off = animator.GetFloat("Offset");
+        // Debug.Log($"{Time.time}, {offset}");
 
         _levelManager.SetComplete(_playerRequiredNumber, true);
     }

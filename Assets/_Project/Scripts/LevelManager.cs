@@ -1,10 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] string _sceneName;
+    [SerializeField] float _levelLoadDelay = 1.5f;
     int completeStatus = 0;
 
     void Start()
@@ -31,5 +33,11 @@ public class LevelManager : MonoBehaviour
         {
             completeStatus -= playerNumber;
         }
+    }
+    
+    IEnumerator LoadAfterDelay()
+    {
+        yield return new WaitForSeconds(_levelLoadDelay);
+        SceneManager.LoadScene(_sceneName);
     }
 }

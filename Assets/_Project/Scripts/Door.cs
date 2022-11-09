@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
     [SerializeField] SpriteRenderer _rendererMid;
     [SerializeField] SpriteRenderer _rendererTop;
     [SerializeField] int _requiredCoins = 5;
-    [SerializeField] Door _exit;
+    [SerializeField] Transform _exit;
     [SerializeField] Canvas _canvas;
     
     bool _open;
@@ -41,7 +41,7 @@ public class Door : MonoBehaviour
         var player = other.GetComponent<Player>();
         if (player != null)
         {
-            player.TeleportTo(_exit.transform.position);
+            player.TeleportTo(_exit.position);
         }
     }
 }
