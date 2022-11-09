@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     float _fallTimer;
     float _jumpTimer = 0f;
     float _horizontal;
+    int _groundLayerMask;
 
     bool _jumpCued = false;
     bool _jumpHeld = false;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _isGroundSlippery = true;
+        _groundLayerMask = LayerMask.GetMask("Default");
 
         if (FindObjectOfType<PlayerManager>().multiInput)
             Setup2PInput();
@@ -161,7 +163,7 @@ public class Player : MonoBehaviour
 
     void UpdateIsGrounded()
     {
-        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
+        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, _groundLayerMask);
         _isGrounded = hit != null;
 
         if (hit != null)
