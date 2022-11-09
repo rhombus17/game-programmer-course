@@ -94,6 +94,8 @@ public class FallingPlatform : MonoBehaviour
             _playerInside = false;
             StopCoroutine(_coroutine);
 
+            _transform.position = _startPostion;
+
             if (_resetShakeTimerOnEmpty)
             {
                 _wiggleTimer = 0f;

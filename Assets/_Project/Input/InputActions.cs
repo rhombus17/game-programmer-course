@@ -46,6 +46,15 @@ namespace TutInput
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c448718-176c-40b8-bac6-128ce32fc077"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,28 @@ namespace TutInput
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba6bb0b3-0a55-4769-9dec-5a8a0b77934f"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e43dbd9c-3253-43d2-ab45-f8b88f7cfc77"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -134,6 +165,15 @@ namespace TutInput
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""f11179b3-7b78-4b32-8286-0ec936fcd479"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""0b02c219-5825-49bf-8de1-d57f23855def"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -182,6 +222,28 @@ namespace TutInput
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51bd5a11-109d-437c-bf1e-8fcdfc3bb1c2"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb5232a3-b9e9-4099-867a-8eed69451a9e"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -239,10 +301,12 @@ namespace TutInput
             m_P1 = asset.FindActionMap("P1", throwIfNotFound: true);
             m_P1_Move = m_P1.FindAction("Move", throwIfNotFound: true);
             m_P1_Jump = m_P1.FindAction("Jump", throwIfNotFound: true);
+            m_P1_Switch = m_P1.FindAction("Switch", throwIfNotFound: true);
             // P2
             m_P2 = asset.FindActionMap("P2", throwIfNotFound: true);
             m_P2_Move = m_P2.FindAction("Move", throwIfNotFound: true);
             m_P2_Jump = m_P2.FindAction("Jump", throwIfNotFound: true);
+            m_P2_Switch = m_P2.FindAction("Switch", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -304,12 +368,14 @@ namespace TutInput
         private IP1Actions m_P1ActionsCallbackInterface;
         private readonly InputAction m_P1_Move;
         private readonly InputAction m_P1_Jump;
+        private readonly InputAction m_P1_Switch;
         public struct P1Actions
         {
             private @InputActions m_Wrapper;
             public P1Actions(@InputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_P1_Move;
             public InputAction @Jump => m_Wrapper.m_P1_Jump;
+            public InputAction @Switch => m_Wrapper.m_P1_Switch;
             public InputActionMap Get() { return m_Wrapper.m_P1; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -325,6 +391,9 @@ namespace TutInput
                     @Jump.started -= m_Wrapper.m_P1ActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_P1ActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_P1ActionsCallbackInterface.OnJump;
+                    @Switch.started -= m_Wrapper.m_P1ActionsCallbackInterface.OnSwitch;
+                    @Switch.performed -= m_Wrapper.m_P1ActionsCallbackInterface.OnSwitch;
+                    @Switch.canceled -= m_Wrapper.m_P1ActionsCallbackInterface.OnSwitch;
                 }
                 m_Wrapper.m_P1ActionsCallbackInterface = instance;
                 if (instance != null)
@@ -335,6 +404,9 @@ namespace TutInput
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Switch.started += instance.OnSwitch;
+                    @Switch.performed += instance.OnSwitch;
+                    @Switch.canceled += instance.OnSwitch;
                 }
             }
         }
@@ -345,12 +417,14 @@ namespace TutInput
         private IP2Actions m_P2ActionsCallbackInterface;
         private readonly InputAction m_P2_Move;
         private readonly InputAction m_P2_Jump;
+        private readonly InputAction m_P2_Switch;
         public struct P2Actions
         {
             private @InputActions m_Wrapper;
             public P2Actions(@InputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_P2_Move;
             public InputAction @Jump => m_Wrapper.m_P2_Jump;
+            public InputAction @Switch => m_Wrapper.m_P2_Switch;
             public InputActionMap Get() { return m_Wrapper.m_P2; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -366,6 +440,9 @@ namespace TutInput
                     @Jump.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnJump;
+                    @Switch.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnSwitch;
+                    @Switch.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnSwitch;
+                    @Switch.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnSwitch;
                 }
                 m_Wrapper.m_P2ActionsCallbackInterface = instance;
                 if (instance != null)
@@ -376,6 +453,9 @@ namespace TutInput
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
+                    @Switch.started += instance.OnSwitch;
+                    @Switch.performed += instance.OnSwitch;
+                    @Switch.canceled += instance.OnSwitch;
                 }
             }
         }
@@ -420,11 +500,13 @@ namespace TutInput
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnSwitch(InputAction.CallbackContext context);
         }
         public interface IP2Actions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnSwitch(InputAction.CallbackContext context);
         }
     }
 }

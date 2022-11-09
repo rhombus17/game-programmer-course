@@ -15,6 +15,10 @@ public class PushButtonSwitch : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _releasedSprite = _spriteRenderer.sprite;
+    }
+
+    void Start()
+    {
         BecomeReleased();
     }
 
@@ -30,7 +34,7 @@ public class PushButtonSwitch : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         var player = other.GetComponent<Player>();
-        if (player == null)
+        if (player == null || player.PlayerNumber != _playerNumber)
             return;
         
         BecomeReleased();

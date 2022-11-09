@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: P2_jump
+  m_Name: p2_jump
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
