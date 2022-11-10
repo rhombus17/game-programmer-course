@@ -10,41 +10,59 @@ public class Collector : MonoBehaviour
     [SerializeField] UnityEvent _onCollectionComplete;
 
     TMP_Text _remainingCollectiblesText;
-    int _curCount;
+    int _curCollected;
 
     void Awake()
     {
         _remainingCollectiblesText = GetComponentInChildren<TMP_Text>();
-        UpdateCount(_collectibles.Length);
+        _curCollected = 0;
+        UpdateCount();
     }
 
-    void Update()
+    void Start()
     {
-        var newCount = 0;
         foreach (var collectible in _collectibles)
         {
-            if (collectible.isActiveAndEnabled)
-                newCount++;
+            collectible.OnPickedUp += MarkCollected;
         }
+    }
 
-        if (newCount != _curCount)
-            UpdateCount(newCount);
+    void MarkCollected()
+    {
+        _curCollected++;
+        UpdateCount();
+    }
 
-        if (newCount > 0)
+    void UpdateCount()
+    {
+        int remainingCollectibles = _collectibles.Length - _curCollected;
+        _remainingCollectiblesText?.SetText(remainingCollectibles.ToString());
+        
+        if (remainingCollectibles > 0)
             return;
         
         // All Gems Collected
         _onCollectionComplete?.Invoke();
     }
 
-    void UpdateCount(int newCount)
-    {
-        _curCount = newCount;
-        _remainingCollectiblesText?.SetText(newCount.ToString());
-    }
-
     void OnValidate()
     {
         _collectibles = _collectibles.Distinct().ToArray();
+    }
+
+    void OnDrawGizmos() => DrawGizmoLines(Color.grey);
+
+    void OnDrawGizmosSelected() => DrawGizmoLines(Color.yellow);
+
+    void DrawGizmoLines(Color color)
+    {
+        Color cachedColor = Gizmos.color;
+        Gizmos.color = color;
+
+        foreach (var collectible in _collectibles)
+        {
+            Gizmos.DrawLine(transform.position, collectible.transform.position);
+        }
+        Gizmos.color = cachedColor;
     }
 }
