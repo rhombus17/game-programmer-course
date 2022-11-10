@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -22,7 +20,7 @@ public class Door : MonoBehaviour
         }
     }
 
-    void Open()
+    public void Open()
     {
         _open = true;
         _rendererMid.sprite = _openMid;

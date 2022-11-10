@@ -1,3 +1,4 @@
+using System;
 using TutInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,11 +31,15 @@ public class Player : MonoBehaviour
     float _fallTimer;
     float _jumpTimer = 0f;
     float _horizontal;
+    int _groundLayerMask;
+    bool _flipX;
 
     bool _jumpCued = false;
     bool _jumpHeld = false;
 
     InputActions _input;
+    static readonly int JumpHash = Animator.StringToHash("Jump");
+    static readonly int Walk = Animator.StringToHash("Walk");
 
     void Awake()
     {
@@ -44,6 +49,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _isGroundSlippery = true;
+        _groundLayerMask = LayerMask.GetMask("Default");
 
         if (FindObjectOfType<PlayerManager>().multiInput)
             Setup2PInput();
@@ -134,10 +140,10 @@ public class Player : MonoBehaviour
         else
             MoveHorizontal();
 
-
-        UpdateAnimator();
-        UpdateSpriteDirection();
-
+        // UpdateAnimator();
+        // UpdateSpriteDirection();
+        // Debug.Log($"Check 3: {_spriteRenderer.flipX}");
+        
 
         if (ShouldStartJump())
             Jump();
@@ -159,9 +165,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        UpdateSpriteDirection();
+        UpdateAnimator();
+    }
+
     void UpdateIsGrounded()
     {
-        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, LayerMask.GetMask("Default"));
+        var hit = Physics2D.OverlapCircle(_feet.position, 0.1f, _groundLayerMask);
         _isGrounded = hit != null;
 
         if (hit != null)
@@ -187,17 +199,19 @@ public class Player : MonoBehaviour
     void UpdateAnimator()
     {
         bool walking = _horizontal != 0;
-        _animator.SetBool("Walk", walking);
+        _animator.SetBool(Walk, walking);
         bool jumping = ShouldContinueJump();
-        _animator.SetBool("Jump", jumping);
+        _animator.SetBool(JumpHash, !_isGrounded || jumping);
     }
 
     void UpdateSpriteDirection()
     {
         if (_horizontal != 0)
         {
-            _spriteRenderer.flipX = _horizontal < 0;
+            _flipX = _horizontal < 0;
         }
+
+        _spriteRenderer.flipX = _flipX;
     }
 
     bool ShouldStartJump()
