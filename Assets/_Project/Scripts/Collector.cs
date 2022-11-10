@@ -10,37 +10,31 @@ public class Collector : MonoBehaviour
     [SerializeField] UnityEvent _onCollectionComplete;
 
     TMP_Text _remainingCollectiblesText;
-    int _curCount;
+    int _curCollected;
 
     void Awake()
     {
         _remainingCollectiblesText = GetComponentInChildren<TMP_Text>();
-        UpdateCount(_collectibles.Length);
+        _curCollected = 0;
+        UpdateCount();
     }
 
-    void Update()
+    public void MarkCollected()
     {
-        var newCount = 0;
-        foreach (var collectible in _collectibles)
-        {
-            if (collectible.isActiveAndEnabled)
-                newCount++;
-        }
+        _curCollected++;
+        UpdateCount();
+    }
 
-        if (newCount != _curCount)
-            UpdateCount(newCount);
-
-        if (newCount > 0)
+    void UpdateCount()
+    {
+        int remainingCollectibles = _collectibles.Length - _curCollected;
+        _remainingCollectiblesText?.SetText(remainingCollectibles.ToString());
+        
+        if (remainingCollectibles > 0)
             return;
         
         // All Gems Collected
         _onCollectionComplete?.Invoke();
-    }
-
-    void UpdateCount(int newCount)
-    {
-        _curCount = newCount;
-        _remainingCollectiblesText?.SetText(newCount.ToString());
     }
 
     void OnValidate()
