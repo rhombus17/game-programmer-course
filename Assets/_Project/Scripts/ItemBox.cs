@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBox : MonoBehaviour
+public class ItemBox : HittableFromBelow
 {
     [SerializeField] GameObject _item;
-    [SerializeField] Sprite _emptyBoxSprite;
     [SerializeField] Vector2 _itemLaunchVelocity;
 
     bool _used;
+
+    protected override bool CanUse => !_used;
 
     void Start()
     {
@@ -17,18 +15,8 @@ public class ItemBox : MonoBehaviour
             _item.SetActive(false);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    protected override void Use()
     {
-        if (_used)
-            return;
-        
-        var player = col.collider.GetComponent<Player>();
-        if (player == null)
-            return;
-        
-        if (col.contacts[0].normal.y <= 0)
-            return;
-
         _used = true;
         GetComponent<SpriteRenderer>().sprite = _emptyBoxSprite;
         if (_item == null)
