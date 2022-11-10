@@ -23,11 +23,11 @@ public class Collector : MonoBehaviour
     {
         foreach (var collectible in _collectibles)
         {
-            collectible.AddCollector(this);
+            collectible.OnPickedUp += MarkCollected;
         }
     }
 
-    public void MarkCollected()
+    void MarkCollected()
     {
         _curCollected++;
         UpdateCount();
