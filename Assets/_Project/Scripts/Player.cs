@@ -1,3 +1,4 @@
+using System;
 using TutInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,11 +32,14 @@ public class Player : MonoBehaviour
     float _jumpTimer = 0f;
     float _horizontal;
     int _groundLayerMask;
+    bool _flipX;
 
     bool _jumpCued = false;
     bool _jumpHeld = false;
 
     InputActions _input;
+    static readonly int JumpHash = Animator.StringToHash("Jump");
+    static readonly int Walk = Animator.StringToHash("Walk");
 
     void Awake()
     {
@@ -136,10 +140,10 @@ public class Player : MonoBehaviour
         else
             MoveHorizontal();
 
-
-        UpdateAnimator();
-        UpdateSpriteDirection();
-
+        // UpdateAnimator();
+        // UpdateSpriteDirection();
+        // Debug.Log($"Check 3: {_spriteRenderer.flipX}");
+        
 
         if (ShouldStartJump())
             Jump();
@@ -159,6 +163,12 @@ public class Player : MonoBehaviour
             var downForce = _downPull * _fallTimer * _fallTimer;
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y - downForce);
         }
+    }
+
+    void LateUpdate()
+    {
+        UpdateSpriteDirection();
+        UpdateAnimator();
     }
 
     void UpdateIsGrounded()
@@ -189,17 +199,19 @@ public class Player : MonoBehaviour
     void UpdateAnimator()
     {
         bool walking = _horizontal != 0;
-        _animator.SetBool("Walk", walking);
+        _animator.SetBool(Walk, walking);
         bool jumping = ShouldContinueJump();
-        _animator.SetBool("Jump", jumping);
+        _animator.SetBool(JumpHash, !_isGrounded || jumping);
     }
 
     void UpdateSpriteDirection()
     {
         if (_horizontal != 0)
         {
-            _spriteRenderer.flipX = _horizontal < 0;
+            _flipX = _horizontal < 0;
         }
+
+        _spriteRenderer.flipX = _flipX;
     }
 
     bool ShouldStartJump()

@@ -1250,6 +1250,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4158399789342785560, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2accee30c8a82e74abeec95cdd2e05e1, type: 3}
     - target: {fileID: 4158399789342785561, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1293,6 +1297,14 @@ PrefabInstance:
     - target: {fileID: 4158399789342785561, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158399789342785563, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
+      propertyPath: _debug_checkflipx
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158399789342785564, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1565154293394763978, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
@@ -8104,6 +8116,21 @@ MonoBehaviour:
   - {fileID: 853762727}
   - {fileID: 788976133}
   - {fileID: 569729152}
+  _onCollectionComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 877788134}
+        m_TargetAssemblyTypeName: Door, TutProjectAssembly
+        m_MethodName: Open
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &877788133
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8137,7 +8164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877788130}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a71fdfe413943c7479809d3878dd221f, type: 3}
   m_Name: 
@@ -8146,9 +8173,9 @@ MonoBehaviour:
   _openTop: {fileID: 21300000, guid: 07093fbee9bac654087ab4d0400e2598, type: 3}
   _rendererMid: {fileID: 877788135}
   _rendererTop: {fileID: 1812767752}
-  _requiredCoins: 5
-  _exit: {fileID: 0}
-  _canvas: {fileID: 0}
+  _requiredCoins: 99
+  _exit: {fileID: 990532069}
+  _canvas: {fileID: 1566687413}
 --- !u!212 &877788135
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8745,6 +8772,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4158399789342785558, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4158399789342785560, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -8792,6 +8823,10 @@ PrefabInstance:
     - target: {fileID: 4158399789342785561, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158399789342785563, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4158399789342785563, guid: 701b382ba93068846a69ef0aaf4a1e16, type: 3}
       propertyPath: _playerNumber
@@ -9659,7 +9694,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393546604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.000001, y: 1.2499999, z: -12}
+  m_LocalPosition: {x: 5, y: 1.2499999, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11982,7 +12017,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086578564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.000001, y: 1.2499999, z: -12}
+  m_LocalPosition: {x: 5, y: 1.2499999, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
