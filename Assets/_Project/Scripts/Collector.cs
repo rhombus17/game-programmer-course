@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -37,5 +38,10 @@ public class Collector : MonoBehaviour
     {
         _curCount = newCount;
         _remainingCollectiblesText?.SetText(newCount.ToString());
+    }
+
+    void OnValidate()
+    {
+        _collectibles = _collectibles.Distinct().ToArray();
     }
 }
