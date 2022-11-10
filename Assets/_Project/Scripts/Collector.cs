@@ -19,6 +19,14 @@ public class Collector : MonoBehaviour
         UpdateCount();
     }
 
+    void Start()
+    {
+        foreach (var collectible in _collectibles)
+        {
+            collectible.AddCollector(this);
+        }
+    }
+
     public void MarkCollected()
     {
         _curCollected++;
