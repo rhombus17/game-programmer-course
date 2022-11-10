@@ -49,4 +49,20 @@ public class Collector : MonoBehaviour
     {
         _collectibles = _collectibles.Distinct().ToArray();
     }
+
+    void OnDrawGizmos() => DrawGizmoLines(Color.grey);
+
+    void OnDrawGizmosSelected() => DrawGizmoLines(Color.yellow);
+
+    void DrawGizmoLines(Color color)
+    {
+        Color cachedColor = Gizmos.color;
+        Gizmos.color = color;
+
+        foreach (var collectible in _collectibles)
+        {
+            Gizmos.DrawLine(transform.position, collectible.transform.position);
+        }
+        Gizmos.color = cachedColor;
+    }
 }
