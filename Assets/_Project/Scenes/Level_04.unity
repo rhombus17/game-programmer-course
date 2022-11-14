@@ -8470,6 +8470,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5583333888100045723, guid: 7e6c8e6dd4a957f4899a9a3d99b0b577, type: 3}
   m_PrefabInstance: {fileID: 5583333887753951583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &944440342
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_RootOrder
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138696, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138699, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: _oneTimePress
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138699, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: _onReleased.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138699, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: _onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1823818130}
+    - target: {fileID: 1678332300316138699, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: _onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138699, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: _onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678332300316138741, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
+      propertyPath: m_Name
+      value: buttonGreen
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce6b120aac08a964da30732d5e70bdc1, type: 3}
 --- !u!1 &983641673
 GameObject:
   m_ObjectHideFlags: 0
@@ -10311,7 +10388,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7787402, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12935,7 +13012,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 16.163126
+  orthographic size: 16.171875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
