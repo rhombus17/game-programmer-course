@@ -3723,11 +3723,6 @@ Transform:
   m_Father: {fileID: 1288761008}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1412103626 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6930493397421924496, guid: 3eb9df5f31cbfdc42bd47290e04e5a73, type: 3}
-  m_PrefabInstance: {fileID: 6930493398699531610}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1412103630 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6930493397421924500, guid: 3eb9df5f31cbfdc42bd47290e04e5a73, type: 3}
@@ -5235,10 +5230,6 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 12.3046875
       objectReference: {fileID: 0}
-    - target: {fileID: 1770211030230439322, guid: e9237431904784b48811588197c05fcf, type: 3}
-      propertyPath: _target
-      value: 
-      objectReference: {fileID: 1513060857}
     - target: {fileID: 1770211030230439323, guid: e9237431904784b48811588197c05fcf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2181215
@@ -5888,6 +5879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yellow Key
       objectReference: {fileID: 0}
+    - target: {fileID: 6930493397421924496, guid: 3eb9df5f31cbfdc42bd47290e04e5a73, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6930493397421924497, guid: 3eb9df5f31cbfdc42bd47290e04e5a73, type: 3}
       propertyPath: _keyLock
       value: 
@@ -5948,7 +5943,7 @@ PrefabInstance:
     - target: {fileID: 7747622354486560688, guid: e8939669c7ba41245a95b46100349923, type: 3}
       propertyPath: _item
       value: 
-      objectReference: {fileID: 1412103626}
+      objectReference: {fileID: 6930493397421924496, guid: 3eb9df5f31cbfdc42bd47290e04e5a73, type: 3}
     - target: {fileID: 7747622354486560689, guid: e8939669c7ba41245a95b46100349923, type: 3}
       propertyPath: m_Name
       value: Item Box
