@@ -126,8 +126,19 @@ namespace TutInput
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f1372936-2dac-4d0e-8b23-693361cb07de"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ba6bb0b3-0a55-4769-9dec-5a8a0b77934f"",
-                    ""path"": ""<Keyboard>/alt"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

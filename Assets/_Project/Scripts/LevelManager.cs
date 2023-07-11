@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] string _sceneName;
     [SerializeField] float _levelLoadDelay = 1.5f;
     int completeStatus = 0;
+    bool loadingNextLevel;
 
     void Start()
     {
@@ -16,6 +17,9 @@ public class LevelManager : MonoBehaviour
 
     public void SetComplete(int playerNumber, bool complete)
     {
+        if (loadingNextLevel)
+            return;
+        
         if (complete)
         {
             completeStatus += playerNumber;
@@ -23,9 +27,14 @@ public class LevelManager : MonoBehaviour
             {
                 Debug.Log("Level Complete");
                 // Level is done.
+                loadingNextLevel = true;
                 // Stop input
+                Player p = FindObjectOfType<Player>();
+                p.DisablePlayer();
                 // Play celebration animations or whatever
+                FindObjectOfType<PlayerManager>().PlayWinCelebration();
                 // Move on
+                StartCoroutine(LoadAfterDelay());
             }
             
         }
