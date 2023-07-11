@@ -98,6 +98,12 @@ public class Player : MonoBehaviour
             _input.Disable();
     }
 
+    public void PlayWinAnimation()
+    {
+        // Debug.Log("Player win animation");
+        _animator.SetTrigger("Celebrate");
+    }
+
     void Setup1PInput()
     {
         _input = new InputActions();

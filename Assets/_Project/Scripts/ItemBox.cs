@@ -6,6 +6,7 @@ public class ItemBox : HittableFromBelow
     [SerializeField] Vector2 _itemLaunchVelocity;
 
     bool _used;
+    Vector3 _itemOffset = Vector3.up;
 
     protected override bool CanUse => !_used;
 
@@ -17,6 +18,8 @@ public class ItemBox : HittableFromBelow
 
     protected override void Use()
     {
+        _item = Instantiate(_item, transform.position + _itemOffset, Quaternion.identity, transform);
+        
         _used = true;
         GetComponent<SpriteRenderer>().sprite = _emptyBoxSprite;
         if (_item == null)

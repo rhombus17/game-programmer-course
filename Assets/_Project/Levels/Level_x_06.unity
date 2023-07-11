@@ -1814,7 +1814,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773438, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2178,6 +2178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111b1ad2a87e14e4692f2d6c0158b9f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneName: Level_x_07
+  _levelLoadDelay: 1.5
 --- !u!1 &1465055257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,7 +2922,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.898901
+  orthographic size: 9.896484
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

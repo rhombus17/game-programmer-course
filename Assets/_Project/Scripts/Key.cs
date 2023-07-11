@@ -6,12 +6,12 @@ public class Key : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        bool playerCollision = CheckPlayerCollision(other);
-        if (playerCollision)
-            return;
-
         bool lockCollision = CheckLockCollision(other);
         if (lockCollision)
+            return;
+        
+        bool playerCollision = CheckPlayerCollision(other);
+        if (playerCollision)
             return;
     }
 

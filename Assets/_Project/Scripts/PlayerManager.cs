@@ -39,6 +39,12 @@ public class PlayerManager : MonoBehaviour
         
         SwitchPlayer();
     }
+
+    public void PlayWinCelebration()
+    {
+        _p1.PlayWinAnimation();
+        _p2.PlayWinAnimation();
+    }
     
     
 }
