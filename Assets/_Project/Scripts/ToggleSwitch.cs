@@ -12,13 +12,18 @@ public class ToggleSwitch : MonoBehaviour
     [SerializeField] UnityEvent _onMiddleToggle;
     [SerializeField] float _deadZone = 0.5f;
 
+    [SerializeField] AudioClip _leftSound;
+    [SerializeField] AudioClip _rightSound;
+
     ToggleState _toggleState;
     SpriteRenderer _spriteRenderer;
+    AudioSource _audioSource;
     float _xPosition;
 
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
         _xPosition = transform.position.x;
         Toggle(_startingState);
     }
@@ -56,6 +61,8 @@ public class ToggleSwitch : MonoBehaviour
             case ToggleState.Left:
                 _spriteRenderer.sprite = _leftToggleSprite;
                 _onLeftToggle.Invoke();
+                if (_audioSource != null)
+                    _audioSource.PlayOneShot(_leftSound);
                 break;
             case ToggleState.Middle:
                 _spriteRenderer.sprite = _middleToggleSprite;
@@ -64,6 +71,8 @@ public class ToggleSwitch : MonoBehaviour
             case ToggleState.Right:
                 _spriteRenderer.sprite = _rightToggleSprite;
                 _onRightToggle.Invoke();
+                if (_audioSource != null)
+                    _audioSource.PlayOneShot(_rightSound);
                 break;
             default:
                 throw new System.ArgumentOutOfRangeException(nameof(newState), newState, null);

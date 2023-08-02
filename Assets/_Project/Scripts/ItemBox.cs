@@ -18,6 +18,7 @@ public class ItemBox : HittableFromBelow
 
     protected override void Use()
     {
+        base.Use();
         _item = Instantiate(_item, transform.position + _itemOffset, Quaternion.identity, transform);
         
         _used = true;

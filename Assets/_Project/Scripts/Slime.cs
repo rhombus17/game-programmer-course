@@ -78,6 +78,10 @@ public class Slime : MonoBehaviour
         GetComponent<Rigidbody2D>().simulated = false;
         _alive = false;
 
+        var audioSource = GetComponent<AudioSource>();
+        if (audioSource != null)
+            audioSource.Play();
+
         var spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = _deadSprite;
         StartCoroutine(FadeOutOverTime(spriteRenderer));

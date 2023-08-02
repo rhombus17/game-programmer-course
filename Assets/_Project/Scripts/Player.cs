@@ -2,6 +2,7 @@ using System;
 using TutInput;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class Player : MonoBehaviour
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     Rigidbody2D _rigidbody2D;
     Animator _animator;
     SpriteRenderer _spriteRenderer;
+    AudioSource _audioSource;
     Vector2 _startPosition;
     bool _isGrounded;
     bool _isGroundSlippery;
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
         _isGroundSlippery = true;
         _groundLayerMask = LayerMask.GetMask("Default");
 
@@ -238,6 +241,7 @@ public class Player : MonoBehaviour
         _jumpsRemaining--;
         _jumpTimer = 0f;
         _fallTimer = 0f;
+        _audioSource.Play();
     }
 
     void ContinueJump()
@@ -248,7 +252,8 @@ public class Player : MonoBehaviour
 
     public void ResetToStart()
     {
-        TeleportTo(_startPosition);
+        SceneManager.LoadScene("Menu");
+        // TeleportTo(_startPosition);
     }
 
     public void TeleportTo(Vector3 teleportPosition)

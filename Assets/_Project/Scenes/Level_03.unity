@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81aaea7aaf286d24bb7c9ddb01aa6dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundEffects: []
 --- !u!58 &135658665
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -516,7 +517,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773438, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5550,6 +5551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81aaea7aaf286d24bb7c9ddb01aa6dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundEffects: []
 --- !u!58 &430991681
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6734,6 +6736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81aaea7aaf286d24bb7c9ddb01aa6dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundEffects: []
 --- !u!58 &1172994035
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12142,6 +12145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81aaea7aaf286d24bb7c9ddb01aa6dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundEffects: []
 --- !u!58 &1590730511
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12808,6 +12812,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1535020365769192790, guid: a664fdcfb6caa4340aaa086ab47c27c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4474745763844833002, guid: a664fdcfb6caa4340aaa086ab47c27c3, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

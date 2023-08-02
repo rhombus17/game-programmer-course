@@ -12,7 +12,10 @@ public class Collectible : MonoBehaviour
             return;
         
         // Collected
-        gameObject.SetActive(false);
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
         OnPickedUp?.Invoke();
+        
+        GetComponent<AudioSource>().Play();
     }
 }
