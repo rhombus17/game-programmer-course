@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +23,8 @@ public class Flag : MonoBehaviour
 
     IEnumerator LoadAfterDelay()
     {
+        string key = _sceneName + "Unlocked";
+        PlayerPrefs.SetInt(key, 1);
         yield return new WaitForSeconds(_levelLoadDelay);
         SceneManager.LoadScene(_sceneName);
     }
