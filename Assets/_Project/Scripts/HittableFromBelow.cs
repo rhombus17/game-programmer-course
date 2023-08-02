@@ -5,6 +5,7 @@ public class HittableFromBelow : MonoBehaviour
 {
     [SerializeField] protected Sprite _emptyBoxSprite;
     Animator _animator;
+    AudioSource _audioSource;
     
     static readonly int UseHashID = Animator.StringToHash("Use");
 
@@ -13,6 +14,7 @@ public class HittableFromBelow : MonoBehaviour
     void Awake()
     {
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -41,6 +43,7 @@ public class HittableFromBelow : MonoBehaviour
 
     protected virtual void Use()
     {
-        
+        if (_audioSource != null)
+            _audioSource.Play();
     }
 }
