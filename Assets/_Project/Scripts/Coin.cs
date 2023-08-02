@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
@@ -14,5 +12,7 @@ public class Coin : MonoBehaviour
 
         gameObject.SetActive(false);
         CoinsCollected++;
+
+        ScoreSystem.Add(100);
     }
 }
