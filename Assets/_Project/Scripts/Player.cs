@@ -11,12 +11,20 @@ public class Player : MonoBehaviour
     [SerializeField] int _playerNumber = 1;
     [Header("Reference")]
     [SerializeField] Transform _feet;
+    [SerializeField] Transform _leftSensor;
+    [SerializeField] Transform _rightSensor;
     [Header("Movement")]
     [SerializeField] float _speed = 5f;
     [SerializeField] float _slipFactor = 1f;
+    [SerializeField] float _slideVelocity = 1f;
+    [SerializeField] float _accelerating = 10f;
+    [SerializeField] float _breaking = 10f;
+    [SerializeField] float _airAccelerating = 1f;
+    [SerializeField] float _airBreaking = 0f;
     [Header("Jump")]
     [SerializeField] int _maxJumps = 2;
     [SerializeField] float _jumpVelocity = 8f;
+    [SerializeField] float _wallJumpVelocity = 2f;
     [SerializeField] float _downPull = 2f;
     [SerializeField] float _maxJumpDuration = 5f;
 
@@ -42,6 +50,7 @@ public class Player : MonoBehaviour
     InputActions _input;
     static readonly int JumpHash = Animator.StringToHash("Jump");
     static readonly int Walk = Animator.StringToHash("Walk");
+    static readonly int SlideHash = Animator.StringToHash("Slide");
 
     void Awake()
     {
@@ -162,7 +171,14 @@ public class Player : MonoBehaviour
         // UpdateAnimator();
         // UpdateSpriteDirection();
         // Debug.Log($"Check 3: {_spriteRenderer.flipX}");
-        
+        if (ShouldSlide())
+        {
+            if (ShouldStartJump())
+                WallJump(GetSlideDirection());
+            else
+                Slide();
+            return;
+        }
 
         if (ShouldStartJump())
             Jump();
@@ -201,7 +217,15 @@ public class Player : MonoBehaviour
 
     void MoveHorizontal()
     {
-        _rigidbody2D.velocity = new Vector2(_horizontal * _speed, _rigidbody2D.velocity.y);
+        float smoothingFactor = _horizontal == 0 ? _breaking : _accelerating;
+        if (!_isGrounded)
+            smoothingFactor = _horizontal == 0 ? _airBreaking : _airAccelerating;
+
+        float newVelocity = Mathf.Lerp(
+            _rigidbody2D.velocity.x,
+            _horizontal * _speed,
+            Time.deltaTime * smoothingFactor);
+        _rigidbody2D.velocity = new Vector2(newVelocity, _rigidbody2D.velocity.y);
     }
 
     void SlipHorizontal()
@@ -221,6 +245,7 @@ public class Player : MonoBehaviour
         _animator.SetBool(Walk, walking);
         bool jumping = ShouldContinueJump();
         _animator.SetBool(JumpHash, !_isGrounded || jumping);
+        _animator.SetBool(SlideHash, ShouldSlide());
     }
 
     void UpdateSpriteDirection()
@@ -231,6 +256,38 @@ public class Player : MonoBehaviour
         }
 
         _spriteRenderer.flipX = _flipX;
+    }
+
+    bool ShouldSlide()
+    {
+        if (_isGrounded)
+            return false;
+
+        if (_rigidbody2D.velocity.y > 0)
+            return false;
+
+        if (_horizontal <= 0)
+        {
+            var hit = Physics2D.OverlapCircle(_leftSensor.position, 0.1f);
+            return hit != null && hit.CompareTag("Wall");
+        }
+        
+        if (_horizontal >= 0)
+        {
+            var hit = Physics2D.OverlapCircle(_rightSensor.position, 0.1f);
+            return hit != null && hit.CompareTag("Wall");
+        }
+
+        return false;
+    }
+
+    int GetSlideDirection()
+    {
+        if (_horizontal != 0)
+            return _horizontal > 0 ? 1 : -1;
+        
+        var leftHit = Physics2D.OverlapCircle(_leftSensor.position, 0.1f);
+        return leftHit != null ? -1 : 1;
     }
 
     bool ShouldStartJump()
@@ -252,6 +309,16 @@ public class Player : MonoBehaviour
         _jumpTimer = 0f;
         _fallTimer = 0f;
         _audioSource.Play();
+    }
+
+    void WallJump(int slideDirection)
+    {
+        _rigidbody2D.velocity = new Vector2(-slideDirection * _wallJumpVelocity, _jumpVelocity);
+    }
+
+    void Slide()
+    {
+        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, -_slideVelocity);
     }
 
     void ContinueJump()
