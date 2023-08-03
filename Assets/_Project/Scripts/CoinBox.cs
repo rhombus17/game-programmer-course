@@ -16,7 +16,8 @@ public class CoinBox : HittableFromBelow
 
     protected override void Use()
     {
-        base.Use();
+        if (_audioSource != null)
+            _audioSource.Play();
         _remainingCoins--;
         Coin.CoinsCollected++;
     }

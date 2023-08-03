@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class HittableFromBelow : MonoBehaviour
+public abstract class HittableFromBelow : MonoBehaviour
 {
     [SerializeField] protected Sprite _emptyBoxSprite;
     Animator _animator;
-    AudioSource _audioSource;
+    protected AudioSource _audioSource;
     
     static readonly int UseHashID = Animator.StringToHash("Use");
 
@@ -41,9 +41,5 @@ public class HittableFromBelow : MonoBehaviour
             _animator.SetTrigger(UseHashID);
     }
 
-    protected virtual void Use()
-    {
-        if (_audioSource != null)
-            _audioSource.Play();
-    }
+    protected abstract void Use();
 }

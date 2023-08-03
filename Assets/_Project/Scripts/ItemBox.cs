@@ -18,7 +18,8 @@ public class ItemBox : HittableFromBelow
 
     protected override void Use()
     {
-        base.Use();
+        if (_audioSource != null)
+            _audioSource.Play();
         _item = Instantiate(_item, transform.position + _itemOffset, Quaternion.identity, transform);
         
         _used = true;
