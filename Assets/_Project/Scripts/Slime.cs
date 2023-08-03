@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour
+public class Slime : MonoBehaviour, ITakeDamage
 {
     [SerializeField] Transform _sensorLeft;
     [SerializeField] Transform _sensorRight;
@@ -96,5 +96,10 @@ public class Slime : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void TakeDamage()
+    {
+        Die();
     }
 }

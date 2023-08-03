@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Breakable : MonoBehaviour
+public class Breakable : MonoBehaviour, ITakeDamage
 {
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -20,5 +20,10 @@ public class Breakable : MonoBehaviour
 
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public void TakeDamage()
+    {
+        TakeHit();
     }
 }

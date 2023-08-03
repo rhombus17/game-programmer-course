@@ -9,6 +9,7 @@ public class UILevelLoadButton : MonoBehaviour
 
     public void LoadLevel()
     {
+        ScoreSystem.ResetScore();
         SceneManager.LoadScene(_levelToLoad);
     }
 }

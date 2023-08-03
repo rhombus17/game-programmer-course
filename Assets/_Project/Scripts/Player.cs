@@ -101,6 +101,16 @@ public class Player : MonoBehaviour
             _input.Disable();
     }
 
+    public int GetDirection()
+    {
+        return _flipX ? -1 : 1;
+    }
+
+    public InputActions GetInputActions()
+    {
+        return _input;
+    }
+
     public void PlayWinAnimation()
     {
         // Debug.Log("Player win animation");
