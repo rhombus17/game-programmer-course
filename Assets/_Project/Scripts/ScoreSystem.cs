@@ -19,4 +19,9 @@ public class ScoreSystem : MonoBehaviour
             PlayerPrefs.SetInt(HighScoreKey, _score);
         }
     }
+
+    public static void ResetScore()
+    {
+        _score = 0;
+    }
 }

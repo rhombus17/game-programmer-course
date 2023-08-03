@@ -16,6 +16,11 @@ public class UIScore : MonoBehaviour
         ScoreSystem.OnScoreChanged += UpdateScore;
     }
 
+    void OnDestroy()
+    {
+        ScoreSystem.OnScoreChanged -= UpdateScore;
+    }
+
     void UpdateScore(int newScore)
     {
         _scoreText.text = newScore.ToString();

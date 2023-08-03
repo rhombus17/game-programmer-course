@@ -5,6 +5,8 @@ public class Coin : MonoBehaviour
 {
     public static int CoinsCollected;
 
+    public static void ResetCount() => CoinsCollected = 0;
+
     [SerializeField] List<AudioClip> _soundEffects;
 
     void OnTriggerEnter2D(Collider2D other)

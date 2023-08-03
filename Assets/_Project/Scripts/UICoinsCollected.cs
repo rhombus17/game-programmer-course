@@ -10,6 +10,7 @@ public class UICoinsCollected : MonoBehaviour
     {
         _text = GetComponent<TMP_Text>();
         SetCoinsCollected();
+        Coin.ResetCount();
     }
 
     void Update()
